@@ -15,8 +15,14 @@ try:
 	charset = string.ascii_letters + string.digits + '!@#$%^&*()'
 	# creates charset for random password generator
 
-	def clear():
-		os.system('clear')
+	platform = sys.platform
+	if platform == 'win32' or platform == 'cygwin':
+		def clear():
+			os.system('cls')
+	else:
+		def clear():
+			os.system('clear')
+			# windows compatability
 
 	clear()
 	# creates clear function
