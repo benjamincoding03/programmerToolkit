@@ -133,16 +133,48 @@ try:
 		print passwd
 		main()
 
+	def hexConvert(type, value):
+		try:
+			if type == 'ascii':
+				hexValue = ''
+				for letter in value:
+					hexValue = hexValue + format(ord(letter), "x") + ' '
+					# goes through each letter and converts it to a hex decimal
+
+				print hexValue
+				main()
+
+			elif type == 'hex':
+				asciiValue = ''
+				for dec in value.split():
+					asciiValue = asciiValue + dec.decode('hex') + ' '
+					# goes the each hex decimal and decodes it to ascii
+
+				print asciiValue
+				main()
+
+			else:
+				print 'Error'
+				main()
+
+		except TypeError:
+			print 'Invalid entry'
+			main()
+
 	def binConvert(type, value):
 		try:
 			if type == 'ascii':
 				binary = bin(int(binascii.hexlify(value), 16))
+				# converts ascii to binary
+
 				print binary
 				main()
 
 			elif type == 'binary':
 				n = int(value, 2)
 				string = binascii.unhexlify('%x' % n)
+				# converts binary to ascii
+
 				print string
 
 			else:
@@ -151,7 +183,6 @@ try:
 				# checks to see if user chose ascii or binary and acts accordingly
 
 		except ValueError:
-			clear()
 			print 'Invalid entry'
 			main()
 
@@ -160,10 +191,11 @@ try:
 		print '(1) Clear screen'
 		print '(2) Banner'
 		print '(3) Binary converter'
-		print '(4) Password generator'
-		print '(5) SHA-256 hash generator'
-		print '(6) Port scanner'
-		print '(7) Directory scanner'
+		print '(4) Hex converter'
+		print '(5) Password generator'
+		print '(6) SHA-256 hash generator'
+		print '(7) Port scanner'
+		print '(8) Directory scanner'
 
 		option = raw_input('\n#> ')
 		# asks user for tool to use
@@ -208,6 +240,30 @@ try:
 				# checks if user is converting from ascii to binary or vise versa
 
 		elif option == '4':
+			clear()
+			conType = raw_input('(a)scii or (h)ex: ')
+
+			if conType.lower() == 'a':
+				string = raw_input('String: ')
+
+				clear()
+				hexConvert('ascii', string)
+				main()
+
+			elif conType.lower() == 'h':
+				hexString = raw_input('Hex: ')
+
+				clear()
+				hexConvert('hex', hexString)
+				main()
+
+			else:
+				clear()
+				print 'Invalid argument'
+				main()
+				# checks if user is converting from ascii to hex or vise versa
+
+		elif option == '5':
 			try:
 				clear()
 				length = raw_input('Length: ')
@@ -218,12 +274,12 @@ try:
 				print 'Enter a valid length'
 				main()
 
-		elif option == '5':
+		elif option == '6':
 			clear()
 			string = raw_input('String: ')
 			hashGen(string)
 
-		elif option == '6':
+		elif option == '7':
 			try:
 				clear()
 				target = raw_input('Target: ')
@@ -236,7 +292,7 @@ try:
 				print 'Enter a valid port'
 				main()
 
-		elif option == '7':
+		elif option == '8':
 			clear()
 			target = raw_input('Target: ')
 			dirList = raw_input('Directory list: ')
@@ -248,6 +304,7 @@ try:
 
 			else:
 				pass
+				# checks if wordlist exists
 
 			dirScan(target, dirList)
 
@@ -261,3 +318,4 @@ try:
 
 except KeyboardInterrupt:
 	sys.exit()
+	# makes for clean exit on press of CTRL+C
