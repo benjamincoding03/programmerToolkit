@@ -5,12 +5,11 @@ import os, sys, binascii, random, string, hashlib, socket, urllib2
 try:
 
 	'''
- __________________
-|                  |
-|Stuff to add 	   |
-|Hex converter     |
-|Disk imager       |
-|__________________|
+ _________________
+|                 |
+|Stuff to add     |
+|Disk imager      |
+|_________________|
 	'''
 
 	charset = string.ascii_letters + string.digits + '!@#$%^&*()'
@@ -297,7 +296,7 @@ try:
 			target = raw_input('Target: ')
 			dirList = raw_input('Directory list: ')
 
-			if os.path.isfile != True:
+			if os.path.isfile(dirList) != True:
 				clear()
 				print 'Invalid wordlist'
 				main()
