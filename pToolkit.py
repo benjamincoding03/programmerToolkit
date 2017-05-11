@@ -3,29 +3,8 @@
 import os, sys, binascii, random, string, hashlib, socket, urllib2
 
 try:
-
-	'''
- _________________
-|                 |
-|Stuff to add     |
-|Disk imager      |
-|_________________|
-	'''
-
 	charset = string.ascii_letters + string.digits + '!@#$%^&*()'
 	# creates charset for random password generator
-
-	platform = sys.platform
-	if platform == 'win32' or platform == 'cygwin':
-		def clear():
-			os.system('cls')
-	else:
-		def clear():
-			os.system('clear')
-			# windows compatability
-
-	clear()
-	# creates clear function
 
 	escape = '\033[1;m'
 	blue = '\033[1;34m'
@@ -38,18 +17,34 @@ try:
 	yellow = '\033[1;33m'
 	# defines colours 
 
-	def banner():
-		print cyan + '''
+	platform = sys.platform
+	if platform == 'win32' or platform == 'cygwin':
+		def clear():
+			os.system('cls')
+
+		def banner():
+			print cyan + '''
+PTOOLKIT
+			''' + escape
+
+	else:
+		def clear():
+			os.system('clear')
+			# windows compatability
+
+		def banner():
+			print cyan + '''
 ██████╗ ████████╗ ██████╗  ██████╗ ██╗     ██╗  ██╗██╗████████╗
 ██╔══██╗╚══██╔══╝██╔═══██╗██╔═══██╗██║     ██║ ██╔╝██║╚══██╔══╝
 ██████╔╝   ██║   ██║   ██║██║   ██║██║     █████╔╝ ██║   ██║
 ██╔═══╝    ██║   ██║   ██║██║   ██║██║     ██╔═██╗ ██║   ██║
 ██║        ██║   ╚██████╔╝╚██████╔╝███████╗██║  ██╗██║   ██║
 ╚═╝        ╚═╝    ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝
-		''' + escape
-		# prints banner
+			''' + escape
 
+	clear()
 	banner()
+	# creates clear function
 
 	def dirScan(target, list):
 		try:
